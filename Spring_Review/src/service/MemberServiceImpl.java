@@ -6,6 +6,17 @@ import entity.Member;
 
 public class MemberServiceImpl implements MemberService {
 
+//	シングルトン：そのクラスのインスタンスが必ず1つであることを保証するデザインパターン
+
+//	インスタンスをnewする
+	private static MemberServiceImpl singleton = new MemberServiceImpl();
+//	コンストラクタをprivateに設定（外からnewできない）
+	private MemberServiceImpl () {};
+//	インスタンスを呼び出すメソッドを作る
+	public static MemberServiceImpl getInstance() {
+		return singleton;
+	}
+
 	@Override
 	public String greet(int i) {
 		String[] greetings = {"Good Morning", "Hello", "Good Evening"};
@@ -22,6 +33,18 @@ public class MemberServiceImpl implements MemberService {
 		list.add(mem2);
 
 		return list;
+	}
+
+	@Override
+	public int sumOf(int x, int y) {
+		int total = x;
+		x += 1;
+		while (x <= y) {
+			total += x;
+			x += 1;
+		}
+
+		return total;
 	}
 
 }
